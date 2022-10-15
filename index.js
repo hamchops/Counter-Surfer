@@ -56,3 +56,11 @@ function animate () {
 }
 
 animate();
+
+
+addEventListener('keydown', ({keyCode }) => {
+switch (keyCode) {
+    case 65:
+        console.log('left')
+        break
+}
