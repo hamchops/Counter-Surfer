@@ -10,6 +10,8 @@ const c = canvas.getContext('2d')
 console.log(c)
 
 //Generel player setup. Use this class to give specific attibutes to player (e.g. size,speed, color) Start with basic square shape then style later.
+const gravity = 0.5
+
 class Shadow {
     constructor() {
         this.position = {
@@ -18,7 +20,7 @@ class Shadow {
         }
         this.velocity = {
             x:0,
-            y:1
+            y:0
         }
         this.width =35
         this.height = 35
@@ -30,18 +32,27 @@ class Shadow {
         c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
     update() {
-        this.position.y += this.velocity.y
         this.draw()
+        this.position.y += this.velocity.y
+
+        if (this.position.y + this.height + this.velocity.y < canvas.height)
+        this.velocity.y += gravity
+        else this.velocity.y = 0
     }
-    
 }
+
 
 
 
 
 const shadow = new Shadow ()
-shadow.draw()
 
+
+//declare shadow.update to target animation update. This creates a loop. clearRect needs 4 argument(x,y,width,height)
 function animate () {
-    requestAnimationFrame()
+    requestAnimationFrame(animate)
+    c.clearRect(0,0,canvas.width,canvas.height)
+    shadow.update()
 }
+
+animate();
