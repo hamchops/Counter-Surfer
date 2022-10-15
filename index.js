@@ -33,6 +33,7 @@ class Shadow {
     }
     update() {
         this.draw()
+        this.position.x += this.velocity.x
         this.position.y += this.velocity.y
 
         if (this.position.y + this.height + this.velocity.y < canvas.height)
@@ -46,6 +47,14 @@ class Shadow {
 
 
 const shadow = new Shadow ()
+const keys = {
+    right: {
+        pressed: false
+    },
+    left: {
+        pressed: false,
+    },
+}
 
 
 //declare shadow.update to target animation update. This creates a loop. clearRect needs 4 argument(x,y,width,height)
@@ -53,14 +62,51 @@ function animate () {
     requestAnimationFrame(animate)
     c.clearRect(0,0,canvas.width,canvas.height)
     shadow.update()
+
+     if (keys.right.pressed) {
+        shadow.velocity.x = 5
+    } else if (keys.left.pressed) {
+        shadow.velocity.x = -5
+    } else shadow.velocity.x = 0
 }
 
 animate();
 
-
-addEventListener('keydown', ({keyCode }) => {
+//without addressing "window" as argument. function was unresponsive.
+window.addEventListener('keydown', ({keyCode}) => {
 switch (keyCode) {
     case 65:
+        keys.left.pressed = true
         console.log('left')
         break
+    case 87:
+        shadow.velocity.y -= 10
+        console.log('up')
+        break
+    case 83:
+        shadow.velocity.y += 10
+        console.log('down')
+        break
+    case 68:
+        keys.right.pressed = true
+        console.log('right')
+        break
 }
+})
+
+window.addEventListener('keyup', ({keyCode}) => {
+    switch (keyCode) {
+        case 65:
+            keys.left.pressed = false
+            break
+        case 87:
+            shadow.velocity.y = 20
+            break
+        case 83:
+            shadow.velocity.y = 20
+            break
+        case 68:
+            keys.right.pressed = false
+            break
+    }
+    })
