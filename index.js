@@ -45,7 +45,7 @@ class Shadow {
 
 
 class Platform {
-    constructor({x, y }) {
+    constructor(x, y) {
         this.position = {
             x,
             y
@@ -60,10 +60,9 @@ class Platform {
     }
 }
 
-
+//using closing brackets inside array paranthesis will make platforms disappear. Don't list (x,y) in Platform just number.
 const shadow = new Shadow ()
-const platforms = [new Platform({x: 200, y: 100}), new Platform({x:450, y: 175})]
-
+const platforms = [new Platform(200, 100), new Platform (550, 280)]
 
 const keys = {
     right: {
@@ -80,38 +79,38 @@ function animate () {
     requestAnimationFrame(animate)
     c.clearRect(0,0,canvas.width, canvas.height)
     shadow.update()
-    platforms.forEach((platform) => {
+    platforms.forEach(platform =>{
         platform.draw()
     })
-
+     
      if (keys.right.pressed && shadow.position.x < 400) {
         shadow.velocity.x = 5
     } else if (keys.left.pressed && shadow.position.x > 100) {
         shadow.velocity.x = -5
     } else {
         shadow.velocity.x = 0
-        if (keys.right.pressed) {
-            platforms.forEach((platform) => {
-                platform.position.x -= 5
-                
-            })
-            
-        } else if (keys.left.pressed) {
-            platforms.forEach((platform) => {
-                platform.position.x += 5
-            })
-           
-        }
+       
+     if (keys.right.pressed) {
+        platforms.forEach((platform) => {
+            platform.position.x -= 5
+        })
+    } else if (keys.left.pressed) {
+        platforms.forEach((platform) => {
+        platform.position.x += 5
+       })
     }
 }
+
 //platform collision detect.
 platforms.forEach((platform) => {
-    if (shadow.position.y + shadow.height <= platform.position.y 
-        && shadow.position.y + shadow.height + shadow.velocity.y >= platform.position.y 
-        && shadow.position.x + shadow.width >= platform.position.x && shadow.position.x <= platform.position.x + platform.width) {
-        shadow.velocity.y = 0
-        }
-    })
+    if (
+        shadow.position.y + shadow.height <= platform.position.y && shadow.position.y + shadow.height + shadow.velocity.y >= platform.position.y
+        && shadow.position.x + shadow.width >= platform.position.x && shadow.position.x <= platform.position.x + platform.width
+        ) { 
+       shadow.velocity.y = 0
+    }
+})
+}
 
 
 animate();
