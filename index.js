@@ -9,7 +9,7 @@ canvas.height = innerHeight
 const c = canvas.getContext('2d')
 console.log(c)
 
-//Generel player setup. Use this class to give specific attibutes to player (e.g. size,speed, color) Start with basic square shape then style later.
+//Generel shadow setup. Use this class to give specific attibutes to shadow (e.g. size,speed, color) Start with basic square shape then style later.
 const gravity = 0.5
 
 class Shadow {
@@ -26,7 +26,7 @@ class Shadow {
         this.height = 35
         }
 
-// // draw refers to player on canvas. "c." targets element on canvas
+// // draw refers to shadow on canvas. "c." targets element on canvas
     draw(){
         c.fillStyle = 'orange'
         c.fillRect(this.position.x, this.position.y, this.width, this.height)
@@ -44,9 +44,27 @@ class Shadow {
 
 
 
+class Platform {
+    constructor({x, y }) {
+        this.position = {
+            x,
+            y
+        }
+        this.width = 200
+        this.height = 20
+    }
+
+    draw() {
+        c.fillStyle = 'blue'
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+    }
+}
 
 
 const shadow = new Shadow ()
+const platforms = [new Platform({x: 200, y: 100}), new Platform({x:450, y: 175})]
+
+
 const keys = {
     right: {
         pressed: false
@@ -60,15 +78,41 @@ const keys = {
 //declare shadow.update to target animation update. This creates a loop. clearRect needs 4 argument(x,y,width,height)
 function animate () {
     requestAnimationFrame(animate)
-    c.clearRect(0,0,canvas.width,canvas.height)
+    c.clearRect(0,0,canvas.width, canvas.height)
     shadow.update()
+    platforms.forEach((platform) => {
+        platform.draw()
+    })
 
-     if (keys.right.pressed) {
+     if (keys.right.pressed && shadow.position.x < 400) {
         shadow.velocity.x = 5
-    } else if (keys.left.pressed) {
+    } else if (keys.left.pressed && shadow.position.x > 100) {
         shadow.velocity.x = -5
-    } else shadow.velocity.x = 0
+    } else {
+        shadow.velocity.x = 0
+        if (keys.right.pressed) {
+            platforms.forEach((platform) => {
+                platform.position.x -= 5
+                
+            })
+            
+        } else if (keys.left.pressed) {
+            platforms.forEach((platform) => {
+                platform.position.x += 5
+            })
+           
+        }
+    }
 }
+//platform collision detect.
+platforms.forEach((platform) => {
+    if (shadow.position.y + shadow.height <= platform.position.y 
+        && shadow.position.y + shadow.height + shadow.velocity.y >= platform.position.y 
+        && shadow.position.x + shadow.width >= platform.position.x && shadow.position.x <= platform.position.x + platform.width) {
+        shadow.velocity.y = 0
+        }
+    })
+
 
 animate();
 
@@ -109,4 +153,5 @@ window.addEventListener('keyup', ({keyCode}) => {
             keys.right.pressed = false
             break
     }
-    })
+ })
+
