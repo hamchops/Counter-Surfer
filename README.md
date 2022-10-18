@@ -15,4 +15,7 @@ https://github.com/hamchops/Counter-Surfer/blob/main/Counter%20Surfer%20WIrefram
 ================================
 Sources:
 
-Ground Boundary/
+Rectangular Collision Detection:
+https://www.youtube.com/watch?v=_MyPLZSGS3s
+
+

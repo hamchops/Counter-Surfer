@@ -22,22 +22,44 @@ class Shadow {
             x:0,
             y:0
         }
-        this.width =35
-        this.height = 35
+        this.width =100
+        this.height = 75
+        this.image = document.getElementById("dog sit right")
+        this.frames = 0
+        this.sprites = {
+            stand: {
+                right: document.getElementById("dog sit right")
+            },
+            run: {
+                right: document.getElementById("dog right"),
+                left: document.getElementById("dog left")
+            },
+            bear: {
+                baby: document.getElementById("baby bear")
+            }
         }
+
+        this.currentSprite = this.sprites.stand.right
+        }
+
 
 // // draw refers to shadow on canvas. "c." targets element on canvas
     draw(){
-        c.fillStyle = 'orange'
-        c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        // c.fillStyle = 'orange'
+        // c.fillRect(this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(this.currentSprite, 63.87 * this.frames, 0, 63.87, 40, this.position.x, this.position.y,
+            this.width, this.height)
     }
     update() {
+        this.frames++
+        if (this.frames > 8) this.frames = 0
+
         this.draw()
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
 
-        if (this.position.y + this.height + this.velocity.y < canvas.height)
-        this.velocity.y += gravity
+        if (this.position.y + this.height + this.velocity.y <= canvas.height)
+        {this.velocity.y += gravity}
         else this.velocity.y = 0
     }
 }
@@ -121,10 +143,12 @@ switch (keyCode) {
     case 65:
         keys.left.pressed = true
         console.log('left')
+        shadow.currentSprite = shadow.sprites.run.left
         break
     case 87:
         shadow.velocity.y -= 10
         console.log('up')
+
         break
     case 83:
         shadow.velocity.y += 10
@@ -133,7 +157,12 @@ switch (keyCode) {
     case 68:
         keys.right.pressed = true
         console.log('right')
+        shadow.currentSprite = shadow.sprites.run.right
         break
+    case 66:
+        keys.b.pressed = true
+        console.log("B")
+        shadow.currentSprite = shadow.sprites.bear.baby
 }
 })
 
