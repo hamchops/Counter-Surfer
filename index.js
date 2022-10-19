@@ -28,7 +28,8 @@ class Shadow {
         this.frames = 0
         this.sprites = {
             stand: {
-                right: document.getElementById("dog sit right")
+                right: document.getElementById("dog sit right"),
+                left: document.getElementById("dog sit left")
             },
             run: {
                 right: document.getElementById("dog right"),
@@ -159,10 +160,6 @@ switch (keyCode) {
         console.log('right')
         shadow.currentSprite = shadow.sprites.run.right
         break
-    case 66:
-        keys.b.pressed = true
-        console.log("B")
-        shadow.currentSprite = shadow.sprites.bear.baby
 }
 })
 
@@ -170,6 +167,7 @@ window.addEventListener('keyup', ({keyCode}) => {
     switch (keyCode) {
         case 65:
             keys.left.pressed = false
+            shadow.currentSprite = shadow.sprites.stand.left
             break
         case 87:
             shadow.velocity.y = 20
@@ -179,6 +177,7 @@ window.addEventListener('keyup', ({keyCode}) => {
             break
         case 68:
             keys.right.pressed = false
+            shadow.currentSprite = shadow.sprites.stand.right
             break
     }
  })
