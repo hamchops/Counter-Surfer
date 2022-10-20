@@ -109,6 +109,7 @@ const keys = {
     },
 }
 
+let scrollOffset = 0
 
 //declare shadow.update to target animation update. This creates a loop. clearRect needs 4 argument(x,y,width,height)
 function animate () {
@@ -127,13 +128,18 @@ function animate () {
         shadow.velocity.x = 0
        
      if (keys.right.pressed) {
+        scrollOffset += 5
         platforms.forEach((platform) => {
             platform.position.x -= 5
         })
     } else if (keys.left.pressed) {
+        scrollOffset -= 5
         platforms.forEach((platform) => {
         platform.position.x += 5
        })
+    }
+    if (scrollOffset > 3590) {
+        console.log("You survived")
     }
 }
 
