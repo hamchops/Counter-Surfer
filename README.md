@@ -19,5 +19,9 @@ Rectangular Collision Detection:
 https://www.youtube.com/watch?v=_MyPLZSGS3s
 
 Platform Asset:
-
 https://www.kenney.nl/assets/jumper-pack
+
+Flex-container info:
+https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox
+
+

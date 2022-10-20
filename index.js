@@ -1,4 +1,3 @@
-
 const canvas = document.querySelector('canvas')
 console.log(canvas)
 
@@ -11,6 +10,7 @@ const c = canvas.getContext('2d')
 console.log(c)
 
 //Generel shadow setup. Use this class to give specific attibutes to shadow (e.g. size,speed, color) Start with basic square shape then style later.
+
 const gravity = 0.5
 
 class Shadow {
@@ -61,8 +61,23 @@ class Shadow {
         this.position.y += this.velocity.y
 
         if (this.position.y + this.height + this.velocity.y <= canvas.height)
-        {this.velocity.y += gravity}
-        else this.velocity.y = 0
+        this.velocity.y += gravity
+
+    }
+}
+
+class lava{
+    constructor (x,y) {
+        this.position = {
+            x,
+            y
+        }
+        this.width = 4400
+        this.height = 100
+    }
+    draw() {
+        c.fillStyle = "red"
+        c.fillRect(this.position.x, this.position.y, this.width, this.height)
     }
 }
 
@@ -81,6 +96,8 @@ class smallPlatform{
     }
 }
 
+
+
 class Platform {
     constructor(x, y) {
         this.position = {
@@ -97,9 +114,11 @@ class Platform {
     }
 }
 
+
 //using closing brackets inside array paranthesis will make platforms disappear. Don't list (x,y) in Platform just number.
-const shadow = new Shadow ()
-const platforms = [new Platform(200, 100), new Platform (550, 280), new Platform(0,500), new Platform(780,200), new Platform(1200, 400), new Platform(1480,330), new smallPlatform(1800,300), new smallPlatform(2100,150), new smallPlatform(2400,500),new smallPlatform(2780,100), new smallPlatform(3050,550), new smallPlatform(3300,300),new smallPlatform(3600,400), new Platform(4000,75)]
+let shadow = new Shadow ()
+let platforms = [new Platform(200, 100), new Platform (550, 280), new Platform(0,500), new Platform(780,200), new Platform(1200, 400), new Platform(1480,330), new smallPlatform(1800,300), new smallPlatform(2100,150), new smallPlatform(2400,500),new smallPlatform(2780,100), new smallPlatform(3050,550), new smallPlatform(3300,300),new smallPlatform(3600,400), new Platform(4000,75), new lava(0,720)]
+
 
 const keys = {
     right: {
@@ -108,6 +127,12 @@ const keys = {
     left: {
         pressed: false,
     },
+}
+
+function init() {
+    shadow = new Shadow ()
+    platforms = [new Platform(200, 100), new Platform (550, 280), new Platform(0,500), new Platform(780,200), new Platform(1200, 400), new Platform(1480,330), new smallPlatform(1800,300), new smallPlatform(2100,150), new smallPlatform(2400,500),new smallPlatform(2780,100), new smallPlatform(3050,550), new smallPlatform(3300,300),new smallPlatform(3600,400), new Platform(4000,75), new lava(0,700)]
+
 }
 
 let scrollOffset = 0
@@ -141,6 +166,10 @@ function animate () {
     }
     if (scrollOffset > 3585) {
         console.log("You survived")
+    }
+    if (shadow.position.y > canvas.height){
+        canvas.height = 600
+        init()
     }
 }
 

@@ -2,9 +2,10 @@
     display:none;
     visibility: none;
 }
-.body {
-    color: black;
-}
+
+
+
+
 
 .flex-container {
     font-size: larger;
@@ -14,13 +15,13 @@
 .title {
     margin-inline-start: 13em;
     margin-top: 1em;
-    color: rgba(20, 184, 11, 0.821);
+    color: rgba(39, 234, 29, 0.821);
     font-size: 20px;
     font-family:'Press Start 2P',cursive;
 }
 
 .travel {
-    color: rgba(20, 184, 11, 0.821);
+    color: rgba(39, 234, 29, 0.821);
     margin-top: 1em;
     margin-left: 5em;
     margin-right: 5em;
@@ -30,7 +31,7 @@
 }
 
 .pc {
-    color: rgba(20, 184, 11, 0.821);
+    color: rgba(39, 234, 29, 0.821);
      margin-top: 1em;
      font-size: 20px;
      font-family:'Press Start 2P',cursive;
