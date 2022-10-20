@@ -81,6 +81,8 @@ class lava{
     }
 }
 
+
+
 class smallPlatform{
     constructor (x,y) {
         this.position = {
@@ -131,7 +133,7 @@ const keys = {
 
 function init() {
     shadow = new Shadow ()
-    platforms = [new Platform(200, 100), new Platform (550, 280), new Platform(0,500), new Platform(780,200), new Platform(1200, 400), new Platform(1480,330), new smallPlatform(1800,300), new smallPlatform(2100,150), new smallPlatform(2400,500),new smallPlatform(2780,100), new smallPlatform(3050,550), new smallPlatform(3300,300),new smallPlatform(3600,400), new Platform(4000,75), new lava(0,700)]
+    platforms = [new Platform(200, 100), new Platform (550, 280), new Platform(0,500), new Platform(780,200), new Platform(1200, 400), new Platform(1480,330), new smallPlatform(1800,300), new smallPlatform(2100,150), new smallPlatform(2400,500),new smallPlatform(2780,100), new smallPlatform(3050,550), new smallPlatform(3300,300),new smallPlatform(3600,400), new Platform(4000,75), new lava(0,720)]
 
 }
 
@@ -168,7 +170,6 @@ function animate () {
         console.log("You survived")
     }
     if (shadow.position.y > canvas.height){
-        canvas.height = 600
         init()
     }
 }
