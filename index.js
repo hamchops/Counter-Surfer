@@ -1,3 +1,4 @@
+
 const canvas = document.querySelector('canvas')
 console.log(canvas)
 
@@ -24,7 +25,7 @@ class Shadow {
         }
         this.width =100
         this.height = 75
-        this.image = document.getElementById("dog sit right")
+        this.image = document.getElementById("dog_sit_right")
         this.frames = 0
         this.sprites = {
             stand: {
@@ -138,7 +139,7 @@ function animate () {
         platform.position.x += 5
        })
     }
-    if (scrollOffset > 3590) {
+    if (scrollOffset > 3585) {
         console.log("You survived")
     }
 }

@@ -1,5 +1,11 @@
-div.{
-    display: none;
+.assets {
+    display:none;
+    visibility: none;
+}
+
+.flex-container {
+    font-size: larger;
+    display: inline-flex;
 }
 
 
