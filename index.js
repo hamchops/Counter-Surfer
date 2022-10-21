@@ -1,6 +1,7 @@
 const canvas = document.querySelector('canvas')
 console.log(canvas)
 
+// Ideally have 'window.innderWidth' when adjusting canvas to take up screen space. when in js you can remove the prefix 'window.' from innderwidth.
 canvas.width = innerWidth
 canvas.height = innerHeight
 
@@ -9,7 +10,7 @@ const c = canvas.getContext('2d')
 console.log(c)
 
 
-
+//Generel shadow setup. Use this class to give specific attibutes to shadow (e.g. size,speed, color) Start with basic square shape then style later.
 const gravity = 0.5
 
 class Shadow {
@@ -113,7 +114,7 @@ class Platform {
 }
 
 
-
+//using closing brackets inside array paranthesis will make platforms disappear. Don't list (x,y) in Platform just number.
 let shadow = new Shadow ()
 let platforms = [new Platform(200, 100), new Platform (550, 280), new Platform(0,500), new Platform(780,200), new Platform(1200, 400), new Platform(1480,330), new smallPlatform(1800,300), new smallPlatform(2100,150), new smallPlatform(2400,500),new smallPlatform(2780,100), new smallPlatform(3050,550), new smallPlatform(3300,300),new smallPlatform(3600,400), new Platform(4000,75), new lava(0,720)]
 
@@ -135,7 +136,7 @@ function init() {
 
 let scrollOffset = 0
 
-
+//declare shadow.update to target animation update. This creates a loop. clearRect needs 4 argument(x,y,width,height)
 function animate () {
     requestAnimationFrame(animate)
     c.clearRect(0,0,canvas.width, canvas.height)
@@ -170,7 +171,7 @@ function animate () {
     }
 }
 
-
+//platform collision detect.
 platforms.forEach((platform) => {
     if (
         shadow.position.y + shadow.height <= platform.position.y && shadow.position.y + shadow.height + shadow.velocity.y >= platform.position.y
@@ -184,7 +185,7 @@ platforms.forEach((platform) => {
 
 animate();
 
-
+//without addressing "window" as argument. function was unresponsive.
 window.addEventListener('keydown', ({keyCode}) => {
 switch (keyCode) {
     case 65:
